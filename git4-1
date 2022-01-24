@@ -33,3 +33,17 @@ clone :
 	git log --reverse 옵션으로 제일 위에 있는 첫 번째 커밋을 볼 수 있다.
 	'Initial revision of "git", the information manager from hell' 이라고 써져있다.
 	
+
+git remote add origin https://www.github.com/sanggon6107/gfh.git :
+	
+	깃허브 원격저장소를 등록한다. 별명은 origin. 주소를 일일이 타이핑하기 힘드니까 그 전에 별명을 붙여주는 것. origin 아니라도 상관없다.
+
+	origin은 기본 브랜치. 메인이 되는, 기본이 되는 원격 저장소를 주로 뜻함.
+
+
+git push -u origin master :
+	origin 주소에 master 브랜치를 푸쉬 하겠다.
+
+git push의 -u 옵션 :
+	앞으로는 git push만 해도 이 명령이 수행되도록 하는 설정.
+	처음 한번만 하면 된다.
