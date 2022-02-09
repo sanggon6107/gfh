@@ -1,0 +1,86 @@
+git commit --amend :
+	마지막 커밋 메시지 수정한다.
+
+git pull :
+	원격 저장소 등록된 상태에서, 그 등록된 내용을 가져온다.(git init 이나 git clone 되어있어야 한다.)
+
+ssh :
+	ssh의 특징 : 굳이 id와 password 사용하지 않고도 푸쉬할 수 있다.
+
+	ssh-keygen 입력 : private key, public key 쌍 만든다.
+
+	퍼블릭 키는 원격 저장소에, private 키는 로컬에 저장.
+	public key - private key?
+
+	키 생성된 곳 들어가서 (~/.ssh)
+	cat id_rsa.pub 으로 public key 내용 확인.
+
+	키 내용 복사해서 github 의 세팅 -> ssh 키 등록한다.
+
+	ssh 복사해서 로컬 만들거나, 새 저장소 만들고 ssh 복사해서 클론해도 된다.(git clone <ssh주소> 로컬별명 )
+
+
+원격 저장소의 원리 :
+	config라는 object에 저장된다.
+
+	refs/remotes  : 원격 저장소 최신 커밋 주소 담고 있다.
+	refs/heads ..  : 지역 저장소 최신 커밋 주소 담고 있다.
+
+git fetch vs git pull :
+	git pull : 원격 저장소의 내용을 전부 가져오고 원격 저장소의 head와 master의 head를 일치시킨다.(즉, master의 head도 바꾼다.)
+
+	git fetch : 원격 저장소의 내용을 전부 가져오지만, workspace의 내용은 변경하지 않는다. 즉, 원격 저장소의 내용도 있고 head는 앞서간
+	상태에서, 현재 master의 상태는 그대로 둔 것. 일치시키려면 병합시킨다.
+
+	git merge origin/master : orign의 master를 현재의 master의 HEAD에 병합시킴.
+
+tag :
+	github의 저장소를 보면 commits, brancches, releases와 같은 정보들이 있는데, 
+
+	 releases를 클릭해보자. 1.0.0, 1.0.1 과 같은 태그들을 볼 수 있다.
+
+	각 커밋에 태그를 붙일 수 있다.
+
+	git tag 1.0.0 : 현재 가리키고 있는 커밋(head)에 '1.0.0'이라는 태그를 붙인다.
+
+	git tag 1.0.0 <commit 주소> 또는 <브랜치 이름>: 해당 커밋에 tag 붙인다.
+
+태그의 활용 :
+	git checkout 태그이름 : 해당 태그 이름으로 바로 간다.
+	마치 커밋 이름처럼 태그를 쓸 수 있다.
+
+git tag :
+	태그 리스트 출력.
+	git tag -d <태그이름> : 지운다.
+
+annotated tag :
+	주석 달린 태그. 주석 없는 평소의 태그는 light weight tag.
+
+	git tag -a 1.0.0 -m "bug fix" <commit id> : 해당 태그에 대한 설명.<commit id> 생략하면 head가리킴.
+
+	이후 git tag 입력하면 태그에 설명이 붙어있다.
+
+태그 원격저장소에 push :
+	커밋을 push하는 것만으로는 태그가 같이 저장되지 않는다.
+	로컬의 태그를 푸쉬하려면, 따로
+	git push에 --tags 라는 옵션을 줘야한다.
+
+	깃허브의 edit tag에서 해당 태그에 대한 설명을 쓰고 publish release 클릭하면
+	깃허브에서는 latest release로 사용자들에게 소개해준다.
+
+	edit tag에서 옆 semantic versioning 클릭하면 버저닝의 다양한 기준에 대해 설명해준다. 개발자 교양으로
+	알아둘 것.
+
+
+
+git tag의 원리 :
+	refs/tags/태그이름 : 해당 커밋 오브젝트 가지고 있다.
+
+rebase :
+	merge와 비슷하지만 다른 것.
+	base에서 떨어져 나온 현재의 브랜치를, Base가 이어진 끝에 붙여넣으면서 머지하는 것.
+
+git flow :
+	깃플로우의 구성은 다음과 같다.
+	feature branches     develop        release branches     hotfixes        master
+	dev에서 추가할 기능들   메인 개발  사용자에게 보여줄 버전  마스터에서 잠깐수정  사용자에게 공개
