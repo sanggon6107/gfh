@@ -1,0 +1,49 @@
+git init --bare :
+	'--bare'는 벌거벗은이라는 뜻. 여기에는 다른 작업은 못하고 저장소로서의 기능만 하겠다는 의미이다. 원격 저장소를 만든다는 뜻.
+	깃허브가 아니라 어떤 다른 컴퓨터에 원격 저장소를 만들 때 사용하는 것.
+
+	원격 저장소를 만든 다음에는 로컬 저장소로 돌아와서 원격 저장소를 아래와 같이 등록한다.
+
+	git remote add origin <원격저장소 위치C:\....>
+
+	origin : 그냥 별명. 관습적인 이름일 뿐이다. 다른거 해도 상관없음.
+
+	git remote -v 로 현재 등록된 원격저장소 확인할 수 있다.
+	git remote remove origin  으로 원격저장소 등록 해제 가능하다.
+
+
+	git push : 원격 저장소에 현재 브랜치를 푸쉬한다. 
+
+fork :
+	포크란, 남의 프로젝트를 자신의 원격 저장소에 옮겨오는 것.
+	포크가 많다 = 많은 개발자들이 자신의 원격 저장소에 가져와서 수정도 해보고 싶어 한다.
+	= 훌륭한 프로젝트이다.
+
+clone :
+	init 대신에, clone하면 원격저장소에 있던 로컬 리파지토리에 가져온다.
+
+	git의 오픈소스 코드를 가져와보자!
+
+	git clone https://www.github.com/git/git clone  :
+		clone이라는 디렉토리 안에 해당 코드를 클론한다.
+
+
+	git의 log를 살펴보자!
+
+	git log --reverse 옵션으로 제일 위에 있는 첫 번째 커밋을 볼 수 있다.
+	'Initial revision of "git", the information manager from hell' 이라고 써져있다.
+	
+
+git remote add origin https://www.github.com/sanggon6107/gfh.git :
+	
+	깃허브 원격저장소를 등록한다. 별명은 origin. 주소를 일일이 타이핑하기 힘드니까 그 전에 별명을 붙여주는 것. origin 아니라도 상관없다.
+
+	origin은 기본 브랜치. 메인이 되는, 기본이 되는 원격 저장소를 주로 뜻함.
+
+
+git push -u origin master :
+	origin 주소에 master 브랜치를 푸쉬 하겠다.
+
+git push의 -u 옵션 :
+	앞으로는 git push만 해도 이 명령이 수행되도록 하는 설정.
+	처음 한번만 하면 된다.
